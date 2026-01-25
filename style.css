@@ -1,0 +1,141 @@
+:root {
+    --bg: #050505;
+    --accent: #00f2ff;
+    --card: rgba(255, 255, 255, 0.03);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Clash Display', sans-serif;
+}
+
+body {
+    background-color: var(--bg);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* --- PUZZLE ASSEMBLY INTRO --- */
+#puzzle-intro {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.puzzle-container {
+    display: flex;
+    gap: 10px;
+    perspective: 1000px;
+}
+
+.piece {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--accent);
+    display: inline-block;
+    opacity: 0;
+    filter: blur(10px);
+    transform: translate(var(--x), var(--y)) rotate(var(--r));
+    animation: assemble 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Posisi awal puzzle (acak) */
+.p1 { --x: -200px; --y: -150px; --r: -45deg; animation-delay: 0.1s; }
+.p2 { --x: 150px;  --y: -250px; --r: 30deg;  animation-delay: 0.2s; }
+.p3 { --x: -300px; --y: 100px;  --r: 90deg;  animation-delay: 0.15s; }
+.p4 { --x: 250px;  --y: 200px;  --r: -60deg; animation-delay: 0.25s; }
+.p5 { --x: 0px;    --y: -300px; --r: 15deg;  animation-delay: 0.3s; }
+.p6 { --x: -150px; --y: 250px;  --r: -90deg; animation-delay: 0.2s; }
+.p7 { --x: 300px;  --y: -100px; --r: 45deg;  animation-delay: 0.35s; }
+
+@keyframes assemble {
+    to {
+        opacity: 1;
+        filter: blur(0);
+        transform: translate(0, 0) rotate(0deg);
+        color: white;
+    }
+}
+
+.grid-line {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: rgba(0, 242, 255, 0.2);
+    top: 50%;
+    box-shadow: 0 0 20px var(--accent);
+    animation: scanLine 2s infinite;
+}
+
+@keyframes scanLine {
+    0% { transform: translateY(-100vh); }
+    100% { transform: translateY(100vh); }
+}
+
+/* --- MAIN CONTENT --- */
+.main-content {
+    opacity: 0;
+    transform: scale(0.9) translateY(30px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 100%;
+    max-width: 450px;
+    padding: 20px;
+}
+
+.main-content.show {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+.bento-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.item {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px;
+    padding: 20px;
+    text-decoration: none;
+    color: white;
+    transition: 0.4s;
+}
+
+.item:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: var(--accent);
+    transform: translateY(-5px);
+}
+
+.profile { grid-column: span 2; text-align: center; }
+.pfp img { width: 80px; height: 80px; border-radius: 20px; border: 2px solid var(--accent); margin-bottom: 10px; }
+
+.link-box { display: flex; flex-direction: column; align-items: center; gap: 8px; font-weight: 600; }
+.icon { font-size: 1.5rem; color: var(--accent); }
+
+.wide { grid-column: span 2; }
+.info-card h3 { color: var(--accent); font-size: 1rem; margin-bottom: 5px; }
+.info-card p { font-size: 0.85rem; opacity: 0.7; }
+
+.contact-btn {
+    grid-column: span 2;
+    background: white;
+    color: black;
+    font-weight: 700;
+    text-align: center;
+}
+
+.contact-btn:hover { background: var(--accent); color: black; }

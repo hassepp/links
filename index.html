@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hassepp | Digital Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="puzzle-intro">
+        <div class="puzzle-container">
+            <span class="piece p1">H</span>
+            <span class="piece p2">A</span>
+            <span class="piece p3">S</span>
+            <span class="piece p4">S</span>
+            <span class="piece p5">E</span>
+            <span class="piece p6">P</span>
+            <span class="piece p7">P</span>
+        </div>
+        <div class="grid-line"></div>
+    </div>
+
+    <div class="main-content" id="main">
+        <div class="bento-grid">
+            <div class="item profile">
+                <div class="pfp">
+                    <img src="https://ui-avatars.com/api/?name=Hassepp&background=00f2ff&color=000&size=128" alt="Hassepp">
+                </div>
+                <h1>Hassepp</h1>
+                <p>Digital Strategist & Tech Explorer</p>
+            </div>
+
+            <a href="https://www.instagram.com/hassepp_" class="item link-box instagram">
+                <span class="icon">IG</span>
+                <span class="label">Instagram</span>
+            </a>
+
+            <a href="#" class="item link-box github">
+                <span class="icon">GH</span>
+                <span class="label">GitHub</span>
+            </a>
+
+            <div class="item wide info-card">
+                <h3>System Status: Online</h3>
+                <p>Developing future-proof digital experiences. Based in the 2026 digital ecosystem.</p>
+            </div>
+
+            <a href="#" class="item contact-btn">
+                <span>Unlock Connection</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            const intro = document.getElementById('puzzle-intro');
+            const main = document.getElementById('main');
+
+            // Puzzle menyatu dalam 1.5 detik, lalu hilang di detik ke 2
+            setTimeout(() => {
+                intro.style.opacity = '0';
+                intro.style.transform = 'scale(1.1)';
+                intro.style.pointerEvents = 'none';
+                main.classList.add('show');
+            }, 2200); 
+        });
+    </script>
+</body>
+</html>
