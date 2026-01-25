@@ -1,101 +1,95 @@
 :root {
-    --bg: #050505;
+    --bg: #000;
     --accent: #00f2ff;
     --card: rgba(255, 255, 255, 0.03);
 }
 
-* {
+body {
+    background: var(--bg);
+    color: #fff;
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    overflow: hidden;
     font-family: 'Clash Display', sans-serif;
 }
 
-body {
-    background-color: var(--bg);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    overflow: hidden;
-}
-
-/* --- PUZZLE ASSEMBLY INTRO --- */
-#puzzle-intro {
+/* --- ANIMASI INTRO PREMIUM --- */
+#intro {
     position: fixed;
     inset: 0;
     background: #000;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999;
 }
 
 .puzzle-container {
     display: flex;
     gap: 10px;
-    perspective: 1000px;
 }
 
-.piece {
-    font-size: 4rem;
+.letter {
+    font-size: clamp(2.5rem, 10vw, 5rem);
     font-weight: 700;
-    color: var(--accent);
-    display: inline-block;
     opacity: 0;
-    filter: blur(10px);
-    transform: translate(var(--x), var(--y)) rotate(var(--r));
-    animation: assemble 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    display: inline-block;
+    color: var(--accent);
+    /* Animasi Masuk: Muncul dari arah berbeda dengan efek 'spring' */
+    animation: revealLetter 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-/* Posisi awal puzzle (acak) */
-.p1 { --x: -200px; --y: -150px; --r: -45deg; animation-delay: 0.1s; }
-.p2 { --x: 150px;  --y: -250px; --r: 30deg;  animation-delay: 0.2s; }
-.p3 { --x: -300px; --y: 100px;  --r: 90deg;  animation-delay: 0.15s; }
-.p4 { --x: 250px;  --y: 200px;  --r: -60deg; animation-delay: 0.25s; }
-.p5 { --x: 0px;    --y: -300px; --r: 15deg;  animation-delay: 0.3s; }
-.p6 { --x: -150px; --y: 250px;  --r: -90deg; animation-delay: 0.2s; }
-.p7 { --x: 300px;  --y: -100px; --r: 45deg;  animation-delay: 0.35s; }
+/* Delay Staggered agar muncul satu per satu */
+.letter:nth-child(1) { animation-delay: 0.1s; --move-y: -50px; --move-x: -20px; }
+.letter:nth-child(2) { animation-delay: 0.2s; --move-y: 50px;  --move-x: 10px; }
+.letter:nth-child(3) { animation-delay: 0.3s; --move-y: -60px; --move-x: 30px; }
+.letter:nth-child(4) { animation-delay: 0.4s; --move-y: 40px;  --move-x: -40px; }
+.letter:nth-child(5) { animation-delay: 0.5s; --move-y: -70px; --move-x: 0px; }
+.letter:nth-child(6) { animation-delay: 0.6s; --move-y: 30px;  --move-x: 50px; }
+.letter:nth-child(7) { animation-delay: 0.7s; --move-y: -40px; --move-x: -50px; }
 
-@keyframes assemble {
-    to {
+@keyframes revealLetter {
+    0% {
+        opacity: 0;
+        transform: translate(var(--move-x), var(--move-y)) scale(0.5) rotate(15deg);
+        filter: blur(10px);
+    }
+    100% {
         opacity: 1;
+        transform: translate(0, 0) scale(1) rotate(0deg);
         filter: blur(0);
-        transform: translate(0, 0) rotate(0deg);
-        color: white;
+        color: #fff;
     }
 }
 
-.grid-line {
+.glow-bg {
     position: absolute;
-    width: 100%;
-    height: 1px;
-    background: rgba(0, 242, 255, 0.2);
-    top: 50%;
-    box-shadow: 0 0 20px var(--accent);
-    animation: scanLine 2s infinite;
+    width: 200px;
+    height: 200px;
+    background: var(--accent);
+    filter: blur(120px);
+    opacity: 0.2;
+    animation: pulseGlow 2s infinite alternate;
 }
 
-@keyframes scanLine {
-    0% { transform: translateY(-100vh); }
-    100% { transform: translateY(100vh); }
+@keyframes pulseGlow {
+    from { transform: scale(1); opacity: 0.2; }
+    to { transform: scale(1.5); opacity: 0.4; }
 }
 
-/* --- MAIN CONTENT --- */
-.main-content {
+/* --- MAIN UI TRANSITION --- */
+.container {
     opacity: 0;
-    transform: scale(0.9) translateY(30px);
-    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(30px) scale(0.98);
+    transition: 1.2s cubic-bezier(0.22, 1, 0.36, 1);
     width: 100%;
     max-width: 450px;
     padding: 20px;
+    margin: 0 auto;
 }
 
-.main-content.show {
+.container.show {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: translateY(0) scale(1);
 }
 
 .bento-grid {
@@ -104,38 +98,27 @@ body {
     gap: 15px;
 }
 
-.item {
+.card {
     background: var(--card);
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 24px;
     padding: 20px;
     text-decoration: none;
-    color: white;
+    color: #fff;
     transition: 0.4s;
 }
 
-.item:hover {
-    background: rgba(255,255,255,0.08);
+.card:hover {
     border-color: var(--accent);
-    transform: translateY(-5px);
+    background: rgba(255,255,255,0.08);
 }
 
 .profile { grid-column: span 2; text-align: center; }
-.pfp img { width: 80px; height: 80px; border-radius: 20px; border: 2px solid var(--accent); margin-bottom: 10px; }
+.pfp img { width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--accent); margin-bottom: 10px; }
 
-.link-box { display: flex; flex-direction: column; align-items: center; gap: 8px; font-weight: 600; }
-.icon { font-size: 1.5rem; color: var(--accent); }
+.link-item { display: flex; flex-direction: column; align-items: center; gap: 8px; font-weight: 600; }
+.link-item i { color: var(--accent); }
 
 .wide { grid-column: span 2; }
-.info-card h3 { color: var(--accent); font-size: 1rem; margin-bottom: 5px; }
-.info-card p { font-size: 0.85rem; opacity: 0.7; }
-
-.contact-btn {
-    grid-column: span 2;
-    background: white;
-    color: black;
-    font-weight: 700;
-    text-align: center;
-}
-
-.contact-btn:hover { background: var(--accent); color: black; }
+.cta { background: #fff; color: #000; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+.cta:hover { background: var(--accent); color: #000; }
