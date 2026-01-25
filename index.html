@@ -5,76 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hassepp | Hub</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@700&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@700,600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
     <div id="intro">
-        <div class="puzzle-container">
-            <span class="letter">H</span>
-            <span class="letter">A</span>
-            <span class="letter">S</span>
-            <span class="letter">S</span>
-            <span class="letter">E</span>
-            <span class="letter">P</span>
-            <span class="letter">P</span>
+        <div class="warp-container">
+            <span class="char">H</span>
+            <span class="char">A</span>
+            <span class="char">S</span>
+            <span class="char">S</span>
+            <span class="char">E</span>
+            <span class="char">P</span>
+            <span class="char">P</span>
         </div>
-        <div class="glow-bg"></div>
+        <div class="energy-beam"></div>
     </div>
 
     <div class="container" id="main">
-        <div class="bento-grid">
-            <div class="card profile">
-                <div class="pfp">
-                    <img src="https://ui-avatars.com/api/?name=Hassepp&background=00f2ff&color=000&bold=true" alt="Hassepp">
+        <header class="profile-section">
+            <div class="avatar-wrapper">
+                <img src="logo.JPG" alt="Hassepp">
+                <div class="online-ring"></div>
+            </div>
+            <h1>Hassepp</h1>
+            <p class="subtitle">DESIGN • ARCHITECT • TECH</p>
+        </header>
+
+        <nav class="links-stack">
+            <a href="https://www.instagram.com/hassepp_" class="glass-link">
+                <div class="link-content">
+                    <i data-lucide="instagram"></i>
+                    <span>Instagram</span>
                 </div>
-                <h1>Hassepp</h1>
-                <p>Digital Creator • 2026</p>
-            </div>
-
-            <a href="https://www.instagram.com/hassepp_" class="card link-item">
-                <i data-lucide="instagram"></i>
-                <span>Instagram</span>
+                <i data-lucide="arrow-up-right" class="external"></i>
             </a>
 
-            <a href="#" class="card link-item">
-                <i data-lucide="github"></i>
-                <span>GitHub</span>
+            <a href="https://www.youtube.com/@hasif09_" class="glass-link">
+                <div class="link-content">
+                    <i data-lucide="youtube"></i>
+                    <span>Youtube</span>
+                </div>
+                <i data-lucide="arrow-up-right" class="external"></i>
             </a>
 
-            <div class="card wide info">
-                <h3>Current Status</h3>
-                <p>Building seamless digital experiences with a touch of future aesthetic.</p>
-            </div>
-
-            <a href="#" class="card wide cta">
-                <span>Let's Connect</span>
-                <i data-lucide="external-link"></i>
+            <a href="https://www.tiktok.com/@asepionns_" class="glass-link">
+                <div class="link-content">
+                    <i data-lucide="music"></i>
+                    <span>Tiktok</span>
+                </div>
+                <i data-lucide="arrow-up-right" class="external"></i>
             </a>
-        </div>
+
+            <a href="#" class="glass-link contact">
+                <div class="link-content">
+                    <i data-lucide="zap"></i>
+                    <span>Connect Now</span>
+                </div>
+            </a>
+        </nav>
     </div>
 
     <script>
         lucide.createIcons();
-
         window.addEventListener('load', () => {
-            // Hilangkan intro setelah animasi selesai
             setTimeout(() => {
                 const intro = document.getElementById('intro');
                 const main = document.getElementById('main');
-                
-                intro.style.transition = "opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), filter 0.8s";
+                intro.style.transition = "all 0.8s cubic-bezier(0.8, 0, 0.2, 1)";
                 intro.style.opacity = "0";
-                intro.style.filter = "blur(20px)";
-                
+                intro.style.transform = "scale(1.2)";
                 setTimeout(() => {
                     intro.style.display = "none";
-                    main.classList.add('show');
+                    main.classList.add('reveal');
                 }, 800);
-            }, 2500);
+            }, 2400);
         });
     </script>
 </body>
 </html>
-
