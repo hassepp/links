@@ -1,70 +1,78 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hassepp | Digital Hub</title>
+    <title>Hassepp | Hub</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
-    <div id="puzzle-intro">
+    <div id="intro">
         <div class="puzzle-container">
-            <span class="piece p1">H</span>
-            <span class="piece p2">A</span>
-            <span class="piece p3">S</span>
-            <span class="piece p4">S</span>
-            <span class="piece p5">E</span>
-            <span class="piece p6">P</span>
-            <span class="piece p7">P</span>
+            <span class="letter">H</span>
+            <span class="letter">A</span>
+            <span class="letter">S</span>
+            <span class="letter">S</span>
+            <span class="letter">E</span>
+            <span class="letter">P</span>
+            <span class="letter">P</span>
         </div>
-        <div class="grid-line"></div>
+        <div class="glow-bg"></div>
     </div>
 
-    <div class="main-content" id="main">
+    <div class="container" id="main">
         <div class="bento-grid">
-            <div class="item profile">
+            <div class="card profile">
                 <div class="pfp">
-                    <img src="https://ui-avatars.com/api/?name=Hassepp&background=00f2ff&color=000&size=128" alt="Hassepp">
+                    <img src="https://ui-avatars.com/api/?name=Hassepp&background=00f2ff&color=000&bold=true" alt="Hassepp">
                 </div>
                 <h1>Hassepp</h1>
-                <p>Digital Strategist & Tech Explorer</p>
+                <p>Digital Creator • 2026</p>
             </div>
 
-            <a href="https://www.instagram.com/hassepp_" class="item link-box instagram">
-                <span class="icon">IG</span>
-                <span class="label">Instagram</span>
+            <a href="#" class="card link-item">
+                <i data-lucide="instagram"></i>
+                <span>Instagram</span>
             </a>
 
-            <a href="#" class="item link-box github">
-                <span class="icon">GH</span>
-                <span class="label">GitHub</span>
+            <a href="#" class="card link-item">
+                <i data-lucide="github"></i>
+                <span>GitHub</span>
             </a>
 
-            <div class="item wide info-card">
-                <h3>System Status: Online</h3>
-                <p>Developing future-proof digital experiences. Based in the 2026 digital ecosystem.</p>
+            <div class="card wide info">
+                <h3>Current Status</h3>
+                <p>Building seamless digital experiences with a touch of future aesthetic.</p>
             </div>
 
-            <a href="#" class="item contact-btn">
-                <span>Unlock Connection</span>
+            <a href="#" class="card wide cta">
+                <span>Let's Connect</span>
+                <i data-lucide="external-link"></i>
             </a>
         </div>
     </div>
 
     <script>
-        window.addEventListener('load', () => {
-            const intro = document.getElementById('puzzle-intro');
-            const main = document.getElementById('main');
+        lucide.createIcons();
 
-            // Puzzle menyatu dalam 1.5 detik, lalu hilang di detik ke 2
+        window.addEventListener('load', () => {
+            // Hilangkan intro setelah animasi selesai
             setTimeout(() => {
-                intro.style.opacity = '0';
-                intro.style.transform = 'scale(1.1)';
-                intro.style.pointerEvents = 'none';
-                main.classList.add('show');
-            }, 2200); 
+                const intro = document.getElementById('intro');
+                const main = document.getElementById('main');
+                
+                intro.style.transition = "opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), filter 0.8s";
+                intro.style.opacity = "0";
+                intro.style.filter = "blur(20px)";
+                
+                setTimeout(() => {
+                    intro.style.display = "none";
+                    main.classList.add('show');
+                }, 800);
+            }, 2500);
         });
     </script>
 </body>
