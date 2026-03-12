@@ -28,13 +28,14 @@
             <div class="avatar-wrapper">
                 <img src="logo.jpg" alt="Hassepp">
                 <div class="online-ring"></div>
+                <div class="glow-effect"></div>
             </div>
             <h1>Hassepp</h1>
             <p class="subtitle">DESIGN • ARCHITECT • TECH</p>
         </header>
 
         <nav class="links-stack">
-            <a href="https://www.instagram.com/hassepp_" class="glass-link">
+            <a href="https://www.instagram.com/hassepp_" class="glass-link" target="_blank">
                 <div class="link-content">
                     <i data-lucide="instagram"></i>
                     <span>Instagram</span>
@@ -42,7 +43,7 @@
                 <i data-lucide="arrow-up-right" class="external"></i>
             </a>
 
-            <a href="https://www.youtube.com/@hasif09_" class="glass-link">
+            <a href="https://www.youtube.com/@hasif09_" class="glass-link" target="_blank">
                 <div class="link-content">
                     <i data-lucide="youtube"></i>
                     <span>Youtube</span>
@@ -50,7 +51,7 @@
                 <i data-lucide="arrow-up-right" class="external"></i>
             </a>
 
-            <a href="https://www.tiktok.com/@asepionns_" class="glass-link">
+            <a href="https://www.tiktok.com/@asepionns_" class="glass-link" target="_blank">
                 <div class="link-content">
                     <i data-lucide="music"></i>
                     <span>Tiktok</span>
@@ -68,18 +69,23 @@
     </div>
 
     <script>
+        // Initialize Icons
         lucide.createIcons();
+
+        // Intro to Main Transition
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const intro = document.getElementById('intro');
                 const main = document.getElementById('main');
-                intro.style.transition = "all 0.8s cubic-bezier(0.8, 0, 0.2, 1)";
+                
+                intro.style.transition = "all 1s cubic-bezier(0.8, 0, 0.2, 1)";
                 intro.style.opacity = "0";
-                intro.style.transform = "scale(1.2)";
+                intro.style.filter = "blur(20px)";
+                
                 setTimeout(() => {
                     intro.style.display = "none";
                     main.classList.add('reveal');
-                }, 800);
+                }, 1000);
             }, 2400);
         });
     </script>
