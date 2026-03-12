@@ -1,14 +1,22 @@
 :root {
     --bg: #020808;
     --emerald: #00ffaa;
+    --emerald-glow: rgba(0, 255, 170, 0.3);
     --glass-bg: rgba(255, 255, 255, 0.03);
     --glass-border: rgba(0, 255, 170, 0.15);
 }
 
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
 body {
     background-color: var(--bg);
-    /* Efek Mesh Gradient Hijau Emerald */
-    background-image: radial-gradient(circle at 50% -20%, #004d40 0%, transparent 50%);
+    /* Multi-layer Gradient Background */
+    background-image: 
+        radial-gradient(circle at 50% -10%, rgba(0, 255, 170, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 0% 100%, rgba(0, 77, 64, 0.1) 0%, transparent 40%);
     color: #e0e0e0;
     margin: 0;
     font-family: 'Clash Display', sans-serif;
@@ -16,7 +24,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 /* --- MODERN INTRO: OPTICAL WARP --- */
@@ -25,7 +33,7 @@ body {
     display: flex; justify-content: center; align-items: center; z-index: 9999;
 }
 
-.warp-container { display: flex; gap: 4px; }
+.warp-container { display: flex; gap: 6px; }
 
 .char {
     font-size: clamp(2.5rem, 10vw, 5rem); font-weight: 700;
@@ -35,7 +43,6 @@ body {
     animation: warpIn 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
 }
 
-/* Delay staggered */
 .char:nth-child(1) { animation-delay: 0.1s; }
 .char:nth-child(2) { animation-delay: 0.2s; }
 .char:nth-child(3) { animation-delay: 0.3s; }
@@ -49,64 +56,113 @@ body {
 }
 
 .energy-beam {
-    position: absolute; width: 100%; height: 1px;
+    position: absolute; width: 100%; height: 2px;
     background: linear-gradient(90deg, transparent, var(--emerald), transparent);
-    box-shadow: 0 0 15px var(--emerald);
-    opacity: 0.5; animation: beam 2s infinite linear;
+    box-shadow: 0 0 20px var(--emerald);
+    opacity: 0.4; animation: beam 2s infinite linear;
 }
 @keyframes beam { from { transform: translateY(-100vh); } to { transform: translateY(100vh); } }
 
 /* --- MAIN CONTENT UI --- */
 .container {
-    opacity: 0; transform: translateY(40px);
-    transition: 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-    width: 90%; max-width: 400px;
+    opacity: 0; transform: translateY(30px);
+    transition: 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    width: 90%; max-width: 420px;
+    padding: 40px 0;
 }
 .container.reveal { opacity: 1; transform: translateY(0); }
 
-.profile-section { text-align: center; margin-bottom: 40px; }
+.profile-section { text-align: center; margin-bottom: 45px; }
+
 .avatar-wrapper {
-    position: relative; width: 100px; height: 100px; margin: 0 auto 20px;
+    position: relative; width: 120px; height: 120px; margin: 0 auto 25px;
+    animation: float 4s ease-in-out infinite;
 }
+
 .avatar-wrapper img {
-    width: 100%; height: 100%; border-radius: 35% 65% 65% 35% / 35% 35% 65% 65%; /* Organic shape */
-    object-fit: cover; border: 2px solid var(--emerald);
+    width: 100%; height: 100%; 
+    border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%; 
+    object-fit: cover; border: 2.5px solid var(--emerald);
+    box-shadow: 0 0 30px rgba(0, 255, 170, 0.2);
 }
+
 .online-ring {
-    position: absolute; inset: -5px; border: 1px solid var(--emerald);
-    border-radius: inherit; animation: rotate 10s linear infinite; opacity: 0.3;
+    position: absolute; inset: -8px; border: 1px dashed var(--emerald);
+    border-radius: 50%; animation: rotate 15s linear infinite; opacity: 0.4;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(2deg); }
 }
 @keyframes rotate { to { transform: rotate(360deg); } }
 
-h1 { font-size: 2.5rem; margin: 0; letter-spacing: -1px; }
-.subtitle { font-size: 0.65rem; letter-spacing: 5px; color: var(--emerald); margin-top: 10px; font-weight: 600; }
+h1 { font-size: 2.8rem; margin: 0; letter-spacing: -1px; color: #fff; }
+.subtitle { font-size: 0.7rem; letter-spacing: 6px; color: var(--emerald); margin-top: 12px; font-weight: 600; opacity: 0.8; }
 
 /* --- GLASS LINKS --- */
-.links-stack { display: flex; flex-direction: column; gap: 12px; }
+.links-stack { display: flex; flex-direction: column; gap: 14px; }
 
 .glass-link {
+    position: relative;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    border-radius: 18px;
-    padding: 20px;
+    border-radius: 20px;
+    padding: 18px 24px;
     display: flex; align-items: center; justify-content: space-between;
     text-decoration: none; color: #fff;
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(15px);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+/* Shimmer Effect on Hover */
+.glass-link::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    transition: 0.6s;
 }
 
 .glass-link:hover {
-    background: rgba(0, 255, 170, 0.1);
+    background: rgba(0, 255, 170, 0.08);
     border-color: var(--emerald);
-    transform: scale(1.03);
-    box-shadow: 0 10px 30px rgba(0, 255, 170, 0.1);
+    transform: scale(1.02) translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 255, 170, 0.15);
 }
 
-.link-content { display: flex; align-items: center; gap: 15px; }
-.link-content i { color: var(--emerald); width: 22px; }
-.external { opacity: 0.3; width: 18px; transition: 0.3s; }
-.glass-link:hover .external { opacity: 1; transform: translate(2px, -2px); }
+.glass-link:hover::before { left: 100%; }
 
-.contact { background: var(--emerald); color: #000; border: none; font-weight: 700; }
-.contact .link-content i { color: #000; }
-.contact:hover { background: #fff; color: #000; }
+.link-content { display: flex; align-items: center; gap: 18px; }
+.link-content i { color: var(--emerald); width: 22px; filter: drop-shadow(0 0 5px var(--emerald)); }
+.link-content span { font-weight: 500; font-size: 1.05rem; }
+
+.external { opacity: 0.3; width: 18px; transition: 0.3s; }
+.glass-link:hover .external { opacity: 1; transform: translate(3px, -3px); }
+
+/* Special Contact Button */
+.contact { 
+    background: var(--emerald); 
+    color: #000; 
+    border: none; 
+    font-weight: 700; 
+    margin-top: 10px;
+    box-shadow: 0 5px 20px rgba(0, 255, 170, 0.3);
+    animation: pulse 2s infinite;
+}
+
+.contact .link-content i { color: #000; filter: none; }
+.contact:hover { background: #fff; color: #000; transform: scale(1.05); }
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0, 255, 170, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(0, 255, 170, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 255, 170, 0); }
+}
+
+/* Scrollbar Style */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
